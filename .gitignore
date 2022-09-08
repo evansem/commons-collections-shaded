@@ -6,3 +6,5 @@ raw/
 */target/
 
 */dependency-reduced-pom.xml
+
+*.iml
