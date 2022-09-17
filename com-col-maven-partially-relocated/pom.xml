@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>com-col-partially-relocated</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>7</maven.compiler.source>
+        <maven.compiler.target>7</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.commons.collections</pattern>
+                                    <shadedPattern>shaded.org.apache.commons.collections</shadedPattern>
+                                    <includes>
+                                        <include>org.apache.commons.collections.bag.AbstractBagDecorator</include>
+                                        <include>org.apache.commons.collections.bag.AbstractMapBag</include>
+                                        <include>org.apache.commons.collections.bag.AbstractSortedBagDecorator</include>
+                                        <include>org.apache.commons.collections.bag.HashBag</include>
+                                        <include>org.apache.commons.collections.bag.package.html</include>
+                                        <include>org.apache.commons.collections.bag.PredicatedBag</include>
+                                        <include>org.apache.commons.collections.bag.PredicatedSortedBag</include>
+                                        <include>org.apache.commons.collections.bag.SynchronizedBag</include>
+                                        <include>org.apache.commons.collections.bag.SynchronizedSortedBag</include>
+                                        <include>org.apache.commons.collections.bag.TransformedBag</include>
+                                        <include>org.apache.commons.collections.bag.TransformedSortedBag</include>
+                                        <include>org.apache.commons.collections.bag.TreeBag</include>
+                                        <include>org.apache.commons.collections.bag.TypedBag</include>
+                                        <include>org.apache.commons.collections.bag.TypedSortedBag</include>
+                                        <include>org.apache.commons.collections.bag.UnmodifiableBag</include>
+                                        <include>org.apache.commons.collections.bag.UnmodifiableSortedBag</include>
+                                    </includes>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
